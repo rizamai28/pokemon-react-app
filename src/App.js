@@ -1,20 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { getAllPokemon } from "./utils/pokemon";
+import { getAllPokemon, getPokemon } from "./utils/pokemon";
+import Card from "./components/Card/Card";
 
 function App() {
   const initialUrl = "https://pokeapi.co/api/v2/pokemon/";
+  const [isLoading, setIsLoading] = useState(true);
+  const [pokemonData, setPokemonData] = useState([]);
 
   useEffect(() => {
     const getPokemonApi = async () => {
       // すべてのポケモンデータを取得
-      const res = await getAllPokemon(initialUrl);
-      console.log(res);
+      const pokemonAllData = await getAllPokemon(initialUrl);
+      // 各ポケモンの詳細なデータを取得
+      loadPokemon(pokemonAllData.results);
+
+      setIsLoading(false);
     };
     getPokemonApi();
   }, []);
 
-  return <div className="App"></div>;
+  const loadPokemon = async (results) => {
+    const _pokemonDetailData = await Promise.all(
+      results.map(async (pokemon) => await getPokemon(pokemon.url))
+    );
+    setPokemonData(_pokemonDetailData);
+  };
+
+  console.log(pokemonData);
 }
 
 export default App;
