@@ -22,7 +22,12 @@ export const getPokemon = async (url) => {
 
 export const getPokemonNameJa = (pokemonNameEn) => {
   const pokemonName = pokemonAllNameJson.find(
-    (pokemonName) => pokemonName.en.toLowerCase() === pokemonNameEn
+    (pokemonName) =>
+      pokemonName.en.toLowerCase() === pokemonNameEn.toLowerCase()
   );
-  return pokemonName.ja ?? pokemonNameEn;
+
+  if (pokemonName) {
+    return pokemonName.ja;
+  }
+  return pokemonNameEn;
 };
