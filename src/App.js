@@ -28,6 +28,20 @@ function App() {
   };
 
   console.log(pokemonData);
+
+  return (
+    <div className="App">
+      {isLoading ? (
+        <h1>ロード中...</h1>
+      ) : (
+        <div className="pokemonCardContainer">
+          {pokemonData.map((pokemon, i) => {
+            return <Card pokemon={pokemon} />;
+          })}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;
