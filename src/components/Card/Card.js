@@ -1,4 +1,6 @@
 import React from "react";
+import "./Card.css";
+import { getPokemonNameJa } from "../../utils/pokemon";
 
 const Card = ({ pokemon }) => {
   return (
@@ -6,7 +8,7 @@ const Card = ({ pokemon }) => {
       <div className="cardImg">
         <img src={pokemon.sprites.front_default} alt="pokemon" />
       </div>
-      <h3 className="cardName">{pokemon.name}</h3>
+      <h3 className="cardName">{getPokemonNameJa(pokemon.name)}</h3>
       <div className="cardTypes">
         <p>タイプ</p>
         {pokemon.types.map((type) => (
@@ -16,6 +18,9 @@ const Card = ({ pokemon }) => {
         ))}
       </div>
       <div className="cardInfo">
+        <div className="cardData">
+          <p className="title">図鑑番号: {pokemon.id}</p>
+        </div>
         <div className="cardData">
           <p className="title">重さ: {pokemon.weight} kg</p>
         </div>
