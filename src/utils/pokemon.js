@@ -4,7 +4,16 @@ export const getAllPokemon = async (url) => {
     const resJson = await res.json();
     return resJson;
   } catch (error) {
-    alert("ポケモンデータの取得に失敗しました");
-    console.log(error);
+    console.error(error);
+  }
+};
+
+export const getPokemon = async (url) => {
+  try {
+    const res = await fetch(url);
+    const resJson = await res.json();
+    return resJson;
+  } catch (error) {
+    console.error(error);
   }
 };
